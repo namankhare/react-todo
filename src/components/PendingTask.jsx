@@ -8,52 +8,82 @@ import completeIcon from '../assets/complete.svg';
 import { deleteTask, updateTask } from '../Utils';
 import Tooltip from './Tooltip';
 
+/**
+ * Renders a pending task with options to edit, mark as complete, or delete it.
+ *
+ * @param {string} taskId - The unique identifier of the task.
+ * @param {string} text - The text content of the pending task.
+ * @param {function} setTasks - Function to update the tasks state.
+ */
 const PendingTask = ({ taskId, text, setTasks }) => {
+  // State to manage editing mode and edited text.
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(text);
 
+  // Handler to enable editing mode.
   const handleEditTask = () => setIsEditing(true);
 
+  /**
+   * Handler to save edited task.
+   * */
   const handleSaveTask = async () => {
     const trimmedText = editedText.trim();
     if (!trimmedText) return;
 
     try {
+      // Update the task text.
       const updatedTask = await updateTask(taskId, trimmedText);
+
+      // Update tasks state.
       setTasks(updatedTask);
+
+      // Exit editing mode.
       setIsEditing(false);
     } catch (error) {
-      console.error(error);
-      // Handle error if needed
+      console.error('Error saving task:', error);
     }
   };
 
+  /**
+   *  Handler to delete the task
+   */
   const handleDeleteTask = async () => {
     try {
+      // Delete the task from tasks list
       const updatedTasks = await deleteTask(taskId);
+
+      // Update tasks state.
       setTasks(updatedTasks);
     } catch (error) {
-      console.error(error);
-      // Handle error if needed
+      console.error('Error deleting task:', error);
     }
   };
 
+  /**
+   * Handler to mark task as complete.
+   */
   const handleCompleteTask = async () => {
     try {
+      // Mark the task as complete.
       const updatedTasks = await updateTask(taskId, text, true);
+
+      // Update tasks state.
       setTasks(updatedTasks);
     } catch (error) {
-      console.error(error);
-      // Handle error if needed
+      console.error('Error marking task as complete:', error);
     }
   };
 
+  /**
+   * Handler for double-click event to enable editing mode.
+   */
   const handleDoubleClick = () => {
     setIsEditing(true);
   };
 
   return (
     <div className={taskStyles.singleTaskContainer}>
+      {/* Render input field in editing mode, otherwise render text. */}
       {isEditing ? (
         <input
           type='text'
@@ -65,7 +95,10 @@ const PendingTask = ({ taskId, text, setTasks }) => {
       ) : (
         <p onDoubleClick={handleDoubleClick}>{text}</p>
       )}
+
+      {/* Task actions. */}
       <span className={taskStyles.taskActions}>
+        {/* Render Save Task icon when editing, otherwise render Mark Complete and Edit Task icons. */}
         {isEditing ? (
           <Tooltip text='Save Task'>
             <img
@@ -95,6 +128,8 @@ const PendingTask = ({ taskId, text, setTasks }) => {
             </Tooltip>
           </>
         )}
+
+        {/* Tooltip for deleting the task. */}
         <Tooltip text='Delete Task'>
           <img
             src={deleteIcon}
@@ -108,11 +143,11 @@ const PendingTask = ({ taskId, text, setTasks }) => {
   );
 };
 
-// Prop types validation
+// Prop types validation.
 PendingTask.propTypes = {
-  taskId: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  setTasks: PropTypes.func.isRequired,
+  taskId: PropTypes.string.isRequired, // Required taskId prop.
+  text: PropTypes.string.isRequired, // Required text prop.
+  setTasks: PropTypes.func.isRequired, // Required setTasks prop.
 };
 
 export default PendingTask;

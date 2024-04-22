@@ -8,40 +8,55 @@ function Todo() {
   const [tasks, setTasks] = useState([]);
   const taskRef = useRef(null);
 
-  // Fetch tasks from local storage on component mount
-  useEffect(() => {
-    const fetchTasks = async () => {
+  /**
+   *  Fetch tasks from local storage on component mount.
+   */
+  const fetchTasks = async () => {
+    try {
+      // Fetch tasks data from local storage.
       const tasksData = await getAllTasks();
-      setTasks(tasksData);
-    };
 
+      // Update tasks state with fetched data.
+      setTasks(tasksData);
+    } catch (error) {
+      console.error('Error fetching tasks:', error);
+    }
+  };
+
+  useEffect(() => {
     fetchTasks();
 
-    // Cleanup function to clear tasks state on component unmount
+    // Cleanup function to clear tasks state on component unmount.
     return () => {
       setTasks([]);
     };
   }, []);
 
-  // Handle adding a new task
+  /**
+   * Handle adding a new task
+   */
   const handleAddTask = async () => {
+    // Trim and get new task text from input field.
     const newTaskText = taskRef.current.value.trim();
-    if (!newTaskText) return; // Early return if task text is empty
 
-    // Clear the task input field
+    // Check if task text is empty.
+    if (!newTaskText) return;
+
+    // Clear the task input field.
     taskRef.current.value = '';
 
     try {
-      // Add the new task to the tasks state
+      // Add the new task to the tasks state.
       const newTask = await addNewTask(newTaskText);
       setTasks(newTask);
     } catch (error) {
-      console.error(error);
+      console.error('Error adding new task:', error);
     }
   };
 
   return (
     <>
+      {/* Header Section. */}
       <div className={taskStyles.header}>
         <h1>Minimalistic Todo</h1>
         <p>
@@ -50,7 +65,10 @@ function Todo() {
           your goals with ease.
         </p>
       </div>
+
+      {/* Task Container Section. */}
       <div className={taskStyles.taskContainer}>
+        {/* Pending Tasks Section. */}
         <h2 className={taskStyles.sectionHeading}>Pending Tasks</h2>
         {tasks.filter((task) => task.status === 'Pending').length === 0 && (
           <p className={taskStyles.noTasks}>No pending tasks.</p>
@@ -66,6 +84,7 @@ function Todo() {
             />
           ))}
 
+        {/* Completed Tasks Section. */}
         <h2 className={taskStyles.sectionHeading}>Completed Tasks</h2>
         {tasks.filter((task) => task.status === 'Completed').length === 0 && (
           <p className={taskStyles.noTasks}>No completed tasks.</p>
@@ -81,6 +100,8 @@ function Todo() {
             />
           ))}
       </div>
+
+      {/* Task Input Section. */}
       <div className={taskStyles.taskInput}>
         <input
           type='text'
@@ -89,6 +110,7 @@ function Todo() {
           ref={taskRef}
           placeholder='Enter task description...'
           onKeyDown={(e) => {
+            // Call handleAddTask on Enter key press.
             e.key === 'Enter' && handleAddTask();
           }}
         />
