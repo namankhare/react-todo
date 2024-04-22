@@ -1,0 +1,126 @@
+:root {
+	--primary-color: #213547;
+	--secondary-color: #333;
+	--background-color: #fff;
+	--border-color: #ccc;
+	--hover-color: #dcdcdc;
+	--link-color: #f00;
+	--font-family: arial, sans-serif;
+}
+
+.singleTaskContainer,
+.singleCompletedTaskContainer {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	align-items: center;
+	background-color: var(--background-color);
+	border: 1px solid var(--border-color);
+	box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+	padding: 10px;
+	min-width: 50vw;
+	max-width: 100%;
+}
+
+.singleTaskContainer h2,
+.singleCompletedTaskContainer h2 {
+	color: var(--secondary-color);
+	font-size: 24px;
+	margin: 0;
+}
+
+.singleTaskContainer p,
+.singleCompletedTaskContainer p {
+	margin: 5px 0;
+	color: var(--primary-color);
+}
+
+.singleTaskContainer input {
+	height: 2rem;
+	font-size: 1rem;
+}
+
+.singleCompletedTaskContainer {
+	background-color: var(--hover-color);
+}
+
+.singleTaskContainer:hover,
+.singleCompletedTaskContainer:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+}
+
+.taskContainer {
+	max-height: 50vh;
+	overflow: scroll;
+	border: 1px solid;
+	padding: 1rem;
+}
+
+.header {
+	padding: 1rem;
+}
+
+.taskActions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 5px;
+}
+
+.taskActions img {
+	width: 24px;
+	height: 24px;
+	border: none;
+	background: none;
+	cursor: pointer;
+	stroke: var(--link-color);
+	padding: 0.45rem;
+}
+
+.taskInput {
+	display: flex;
+	margin: 1rem 0;
+}
+
+.taskInput input {
+	width: 100%;
+}
+
+.deleteIcon:hover {
+	filter: invert(0.4) sepia(1) saturate(20) hue-rotate(320.4deg) brightness(1);
+}
+
+.editIcon:hover {
+	filter: invert(0.4) sepia(1) saturate(20) hue-rotate(204.8deg) brightness(1);
+}
+
+.saveIcon:hover {
+	filter: invert(0.4) sepia(1) saturate(20) hue-rotate(86.4deg) brightness(1);
+}
+
+.completeIcon {
+	transition: filter 0.5s;
+}
+
+.completeIcon:hover {
+	filter: invert(0.4) sepia(1) saturate(20) hue-rotate(86.4deg) brightness(1);
+}
+
+.completedIcon {
+	transition: filter 0.5s;
+}
+
+.completedIcon:hover {
+	filter: invert(0.4) sepia(1) saturate(20) hue-rotate(16.4deg) brightness(1);
+}
+
+.completed {
+	text-decoration: line-through;
+}
+
+.sectionHeading {
+	display: inline-block;
+	text-transform: uppercase;
+	border: 1px solid;
+	padding: 0 1rem;
+	font-family: var(--font-family);
+}

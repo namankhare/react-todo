@@ -1,0 +1,37 @@
+:root {
+	--tooltip-background: #000;
+	--tooltip-text-color: #fff;
+	--tooltip-font-size: 0.9rem;
+	--tooltip-font-family: arial, sans-serif;
+}
+
+.tooltipContainer {
+	position: relative;
+}
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.tooltipText {
+	visibility: hidden;
+	background-color: var(--tooltip-background);
+	color: var(--tooltip-text-color);
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	font-size: var(--tooltip-font-size);
+	font-family: var(--tooltip-font-family);
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	transform: translateX(-50%);
+	white-space: nowrap;
+}
+
+.tooltip:hover .tooltipText {
+	visibility: visible;
+}
