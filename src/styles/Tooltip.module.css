@@ -1,3 +1,7 @@
+/**
+ * This file contains styles for the tooltip.
+ */
+
 :root {
 	--tooltip-background: #000;
 	--tooltip-text-color: #fff;
