@@ -2,13 +2,6 @@
  * This file contains styles for the tooltip.
  */
 
-:root {
-	--tooltip-background: #000;
-	--tooltip-text-color: #fff;
-	--tooltip-font-size: 0.9rem;
-	--tooltip-font-family: arial, sans-serif;
-}
-
 .tooltipContainer {
 	position: relative;
 }
@@ -22,7 +15,7 @@
 .tooltipText {
 	visibility: hidden;
 	background-color: var(--tooltip-background);
-	color: var(--tooltip-text-color);
+	color: var(--white-color);
 	text-align: center;
 	border-radius: 6px;
 	padding: 5px;

@@ -18,10 +18,20 @@
 	--link-color-hover: #535bf2;
 	--btn-bg-color: #1a1a1a;
 	--btn-border-color-hover: #747bff;
-	--btn-bg-color-hover: #646cff;
 	--white-color: #fff;
 	--dark-color: #213547;
 	--btn-bg-light-color: #f9f9f9;
+
+	--tooltip-background: #000;
+	--tooltip-font-size: 0.9rem;
+	--tooltip-font-family: arial, sans-serif;
+
+	--primary-color: #213547;
+	--secondary-color: #333;
+	--border-color: #ccc;
+	--hover-color: #dcdcdc;
+	--action-link-color: #f00;
+	--font-family: arial, sans-serif;
 }
 
 a {
@@ -62,7 +72,7 @@ button {
 
 button:hover {
 	border-color: var(--btn-border-color-hover);
-	background-color: var(--btn-bg-color-hover);
+	background-color: var(--link-color);
 }
 
 button:focus,
